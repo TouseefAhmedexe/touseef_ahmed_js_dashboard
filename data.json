@@ -1,0 +1,42 @@
+[
+  {
+    "id": "task-1",
+    "title": "Task 1: HTML Basics and Forms",
+    "status": "Completed",
+    "dueDate": "2026-10-15",
+    "progress": 100,
+    "description": "Constructed personal profile and contact form using semantically correct HTML elements."
+  },
+  {
+    "id": "task-2",
+    "title": "Task 2: Tables and Better Forms",
+    "status": "Completed",
+    "dueDate": "2026-10-22",
+    "progress": 100,
+    "description": "Implemented accessible form structures with input field validation and data tables."
+  },
+  {
+    "id": "task-6",
+    "title": "Task 6: CSS Basics & Styling",
+    "status": "Completed",
+    "dueDate": "2026-11-01",
+    "progress": 100,
+    "description": "Styled personal profile page utilizing basic CSS selectors, colors, and font hierarchies."
+  },
+  {
+    "id": "task-7",
+    "title": "Task 7: Box Model & Layout",
+    "status": "Completed",
+    "dueDate": "2026-11-03",
+    "progress": 100,
+    "description": "Built registration layout using CSS box model, positioning, float layout, and clearfix."
+  },
+  {
+    "id": "task-14",
+    "title": "Task 14: Browser APIs & Vanilla JS",
+    "status": "In Progress",
+    "dueDate": "2026-11-10",
+    "progress": 60,
+    "description": "Developing interactive dashboard utilizing native browser APIs, web storage, and Vanilla JS."
+  }
+]
