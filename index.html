@@ -18,6 +18,78 @@
 
     <div id="toast-container" aria-live="polite"></div>
 
+    <nav id="dashboard-nav">
+        <ul>
+            <li><button type="button" class="nav-btn active" data-section="profile">Profile</button></li>
+            <li><button type="button" class="nav-btn" data-section="assignments">Assignments</button></li>
+            <li><button type="button" class="nav-btn" data-section="progress">Progress</button></li>
+            <li><button type="button" class="nav-btn" data-section="status">Application Status</button></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+        <section id="section-profile" class="dashboard-section active">
+            <h2>Profile</h2>
+            <form id="profile-form">
+                <p>
+                    <label for="user-name">Full Name</label><br>
+                    <input type="text" id="user-name" name="userName" required>
+                </p>
+                <p>
+                    <label for="user-email">Email Address</label><br>
+                    <input type="email" id="user-email" name="userEmail" required>
+                </p>
+                <p>
+                    <label for="avatar-file">Profile Picture</label><br>
+                    <input type="file" id="avatar-file" name="avatarFile" accept="image/*">
+                </p>
+                <p>
+                    <button type="submit">Save Profile</button>
+                </p>
+            </form>
+        </section>
+
+        <section id="section-assignments" class="dashboard-section">
+            <h2>Assignments</h2>
+            <div class="filter-controls">
+                <input type="text" id="search-input" placeholder="Search assignments...">
+                <select id="status-filter">
+                    <option value="all">All Statuses</option>
+                    <option value="Completed">Completed</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Pending">Pending</option>
+                </select>
+            </div>
+            <div id="assignment-list" class="card-grid"></div>
+        </section>
+
+        <section id="section-progress" class="dashboard-section">
+            <h2>Progress Overview</h2>
+            <div id="progress-container">
+                <p>Overall Completion: <span id="progress-percentage">0%</span></p>
+                <progress id="dashboard-progress" value="0" max="100"></progress>
+            </div>
+        </section>
+
+        <section id="section-status" class="dashboard-section">
+            <h2>Application Status</h2>
+            <div id="status-details">
+                <p>Current Status: <strong id="application-state">Under Review</strong></p>
+                <p>Submitted On: <span id="application-date">2026-11-01</span></p>
+            </div>
+        </section>
+    </main>
+
+    <div id="assignment-modal" class="modal-overlay hidden" aria-hidden="true">
+        <div class="modal-content">
+            <button type="button" id="modal-close-btn">&times;</button>
+            <h3 id="modal-title">Assignment Details</h3>
+            <p id="modal-description"></p>
+            <p>Due Date: <span id="modal-due-date"></span></p>
+            <p>Status: <span id="modal-status"></span></p>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
