@@ -28,4 +28,4 @@ Task 14 deliverable for Bloomrix internship.
 
 ## How to Run
 1. Open `index.html` using Visual Studio Code Live Server.
-2. Inspect `Console`, `Network`, and `Application` -> `Local Storage` tabs in DevTools to verify API behavior.
+2. Inspect `Console`, `Network`, and `Application` -> `Local Storage` tabs in DevTools to verify API behavior
