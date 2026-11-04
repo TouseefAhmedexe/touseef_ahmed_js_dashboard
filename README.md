@@ -1,31 +1,36 @@
-# Intern Application & Training Dashboard
+# Bloomrix Intern Application & Training Dashboard
 
-A Vanilla JavaScript dashboard application demonstrating browser APIs, web storage, dynamic DOM manipulation, and defensive programming without external dependencies or frameworks.
+A framework-free Vanilla JavaScript dashboard application demonstrating browser APIs, web storage persistence, accessible modal dialogs, File API validation, URL state synchronization, and defensive programming.
 
 Task 14 deliverable for Bloomrix internship.
 
-## Applied Browser APIs & Architecture
+## Applied Browser APIs & Fixes
 
 1. **Web Storage (`localStorage` & `sessionStorage`):**
-   - User theme (`dashboard_theme`), active tab (`dashboard_active_tab`), and profile details saved in `localStorage`.
-   - Data loading timestamp (`last_data_load`) saved in `sessionStorage`.
+   - Theme preference (`bloomrix_theme`), active navigation section (`bloomrix_active_tab`), notifications read state (`bloomrix_notifications`), and user profile object (`bloomrix_profile`) stored in `localStorage`.
+   - Populates inputs (`#user-name`, `#user-email`) automatically upon browser reload via `restoreState()`.
+   - Data fetch timestamp (`bloomrix_last_fetch`) and last observed view (`bloomrix_last_section`) stored in `sessionStorage`.
 
-2. **URLSearchParams & History API:**
-   - Active status filter is written to URL parameters (`?filter=Completed`) using `URLSearchParams` and `history.replaceState()`.
+2. **Notifications & Per-Card Progress:**
+   - Dedicated Notifications section renders read/unread alerts with interactive buttons and badge counts.
+   - Assignment cards render `<progress>` elements fed directly from `item.progress`. Overall dashboard progress computes total progress averages.
 
-3. **Debounce Functionality:**
-   - Text inputs in the search box are debounced by 300ms to reduce unnecessary re-rendering operations.
+3. **URLSearchParams & History API:**
+   - Whitelisted status filters (`?filter=Completed`) and debounced search strings (`?search=Task`) sync seamlessly via `history.replaceState()`.
 
-4. **FormData & File Input API:**
-   - Profile update details and avatar metadata are processed cleanly via `FormData`.
+4. **File API & Defensive File Validation:**
+   - Drag-and-drop dropzone validates MIME types (`image/*`, `application/pdf`) and byte size limits (<= 2MB) prior to processing.
 
-5. **IntersectionObserver API:**
-   - Tracks active dashboard sections and logs scroll position states to `sessionStorage`.
+5. **Accessibility & Modal Dialog Security:**
+   - Modal dialog includes `role="dialog"`, `aria-modal="true"`, Escape-key dismissal, background scroll lock (`.modal-open`), focus trapping, and focus restoration to triggering controls.
 
-6. **Defensive Programming & Security:**
-   - Node generation via `document.createElement()` and `textContent` prevents direct XSS vulnerabilities.
-   - Defensive element checks prevent runtime failures on missing DOM nodes.
+6. **Defensive Programming & IIFE Encapsulation:**
+   - Encapsulated inside an IIFE to prevent global namespace pollution.
+   - All DOM selections guarded with `safeGetElement()`. Direct node generation via `createEl()` prevents XSS vulnerabilities.
 
-## How to Run
-1. Open `index.html` using Visual Studio Code Live Server.
-2. Inspect `Console`, `Network`, and `Application` -> `Local Storage` tabs in DevTools to verify API behavior
+## DevTools Verification
+1. Open `index.html` via Live Server.
+2. Open DevTools (**F12**):
+   - **Application -> Local Storage:** Confirm `bloomrix_profile` restored into form inputs on reload.
+   - **Network Tab:** Inspect `200 OK` JSON fetching.
+   - **Console Tab:** Confirm clean execution with zero uncaught errors.
