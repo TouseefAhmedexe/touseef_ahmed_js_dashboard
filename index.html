@@ -3,93 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Intern application and training dashboard constructed with Vanilla JS and Browser APIs">
+    <meta name="description" content="Bloomrix modular intern application and training dashboard constructed with Vanilla JS">
     <meta name="author" content="Touseef Ahmed">
-    <title>Intern Application Dashboard</title>
+    <title>Bloomrix Intern Application & Training Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body data-theme="light">
     <header id="top-header">
         <div class="header-container">
-            <h1>Intern Dashboard</h1>
-            <button type="button" id="theme-toggle-btn">Toggle Theme</button>
+            <div class="brand-group">
+                <h1>Bloomrix Intern Dashboard</h1>
+                <span id="network-status" class="status-badge online">Online</span>
+            </div>
+            <div class="header-actions">
+                <span id="live-clock">--:--:--</span>
+                <button type="button" id="theme-toggle-btn" class="btn btn-secondary">Toggle Theme</button>
+                <button type="button" id="clear-storage-btn" class="btn btn-danger">Reset Storage</button>
+            </div>
         </div>
     </header>
 
-    <div id="toast-container" aria-live="polite"></div>
+    <div id="toast-container" aria-live="polite" role="status"></div>
 
-    <nav id="dashboard-nav">
-        <ul>
-            <li><button type="button" class="nav-btn active" data-section="profile">Profile</button></li>
-            <li><button type="button" class="nav-btn" data-section="assignments">Assignments</button></li>
-            <li><button type="button" class="nav-btn" data-section="progress">Progress</button></li>
-            <li><button type="button" class="nav-btn" data-section="status">Application Status</button></li>
+    <nav id="dashboard-nav" aria-label="Main Navigation">
+        <ul role="tablist">
+            <li role="presentation"><button type="button" class="nav-btn active" data-section="overview" role="tab" id="tab-overview" aria-selected="true" aria-controls="section-overview">Overview</button></li>
+            <li role="presentation"><button type="button" class="nav-btn" data-section="profile" role="tab" id="tab-profile" aria-selected="false" aria-controls="section-profile">Profile & Upload</button></li>
+            <li role="presentation"><button type="button" class="nav-btn" data-section="assignments" role="tab" id="tab-assignments" aria-selected="false" aria-controls="section-assignments">Assignments</button></li>
+            <li role="presentation"><button type="button" class="nav-btn" data-section="notifications" role="tab" id="tab-notifications" aria-selected="false" aria-controls="section-notifications">Notifications <span id="unread-count" class="badge-count">0</span></button></li>
+            <li role="presentation"><button type="button" class="nav-btn" data-section="progress" role="tab" id="tab-progress" aria-selected="false" aria-controls="section-progress">Progress Metrics</button></li>
+            <li role="presentation"><button type="button" class="nav-btn" data-section="diagnostics" role="tab" id="tab-diagnostics" aria-selected="false" aria-controls="section-diagnostics">Browser Diagnostics</button></li>
         </ul>
     </nav>
 
     <main id="main-content">
-        <section id="section-profile" class="dashboard-section active">
-            <h2>Profile</h2>
-            <form id="profile-form">
-                <p>
-                    <label for="user-name">Full Name</label><br>
-                    <input type="text" id="user-name" name="userName" required>
-                </p>
-                <p>
-                    <label for="user-email">Email Address</label><br>
-                    <input type="email" id="user-email" name="userEmail" required>
-                </p>
-                <p>
-                    <label for="avatar-file">Profile Picture</label><br>
-                    <input type="file" id="avatar-file" name="avatarFile" accept="image/*">
-                </p>
-                <p>
-                    <button type="submit">Save Profile</button>
-                </p>
-            </form>
+        <section id="section-overview" class="dashboard-section active" role="tabpanel" aria-labelledby="tab-overview">
+            <h2>Internship Overview</h2>
+            <div class="overview-grid">
+                <div class="info-card">
+                    <h3>Program Status</h3>
+                    <p>Track: <strong>Web Development</strong></p>
+                    <p>Current Milestone: <strong>Task 14 (Browser APIs)</strong></p>
+                    <p>Session Duration: <span id="session-timer">00:00</span></p>
+                </div>
+                <div class="info-card">
+                    <h3>Quick Statistics</h3>
+                    <p>Completed Tasks: <strong id="stat-completed">0</strong></p>
+                    <p>Pending Tasks: <strong id="stat-pending">0</strong></p>
+                    <p>Total Modules: <strong id="stat-total">0</strong></p>
+                </div>
+            </div>
         </section>
 
-        <section id="section-assignments" class="dashboard-section">
-            <h2>Assignments</h2>
+        <section id="section-profile" class="dashboard-section" role="tabpanel" aria-labelledby="tab-profile">
+            <h2>Profile & Document Submission</h2>
+            <div class="two-column-layout">
+                <form id="profile-form" class="form-container">
+                    <p>
+                        <label for="user-name">Full Name</label><br>
+                        <input type="text" id="user-name" name="userName" placeholder="Enter full name" required>
+                    </p>
+                    <p>
+                        <label for="user-email">Email Address</label><br>
+                        <input type="email" id="user-email" name="userEmail" placeholder="name@example.com" required>
+                    </p>
+                    <p>
+                        <label for="intern-track">Internship Track</label><br>
+                        <select id="intern-track" name="internTrack" required>
+                            <option value="Frontend Development">Frontend Development</option>
+                            <option value="Backend Development">Backend Development</option>
+                            <option value="Full Stack Engineering">Full Stack Engineering</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="avatar-file">Document Upload (Drag & Drop or Select)</label>
+                    </p>
+                    <div id="drop-zone" class="drop-zone">
+                        <p id="drop-zone-text">Drag and drop file here or click to select (Max 2MB, Images/PDF only)</p>
+                        <input type="file" id="avatar-file" name="avatarFile" class="file-input" accept="image/*,.pdf">
+                    </div>
+                    <div id="file-details" class="file-details hidden"></div>
+                    <p>
+                        <button type="submit" class="btn btn-primary">Save Profile Data</button>
+                    </p>
+                </form>
+
+                <div class="info-card profile-preview-card">
+                    <h3>Saved Profile Preview</h3>
+                    <p>Name: <strong id="preview-name">Not set</strong></p>
+                    <p>Email: <span id="preview-email">Not set</span></p>
+                    <p>Track: <span id="preview-track">Not set</span></p>
+                    <p>Document: <span id="preview-file">None uploaded</span></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="section-assignments" class="dashboard-section" role="tabpanel" aria-labelledby="tab-assignments">
+            <h2>Training Assignments</h2>
             <div class="filter-controls">
-                <input type="text" id="search-input" placeholder="Search assignments...">
-                <select id="status-filter">
-                    <option value="all">All Statuses</option>
-                    <option value="Completed">Completed</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Pending">Pending</option>
-                </select>
+                <div class="search-wrapper">
+                    <label for="search-input" class="visually-hidden">Search assignments</label>
+                    <input type="text" id="search-input" placeholder="Search tasks by title or description..." class="form-control">
+                </div>
+                <div class="filter-wrapper">
+                    <label for="status-filter" class="visually-hidden">Filter by status</label>
+                    <select id="status-filter" class="form-control">
+                        <option value="all">All Statuses</option>
+                        <option value="Completed">Completed</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
             </div>
             <div id="assignment-list" class="card-grid"></div>
         </section>
 
-        <section id="section-progress" class="dashboard-section">
-            <h2>Progress Overview</h2>
-            <div id="progress-container">
-                <p>Overall Completion: <span id="progress-percentage">0%</span></p>
-                <progress id="dashboard-progress" value="0" max="100"></progress>
+        <section id="section-notifications" class="dashboard-section" role="tabpanel" aria-labelledby="tab-notifications">
+            <div class="section-header-flex">
+                <h2>Notifications</h2>
+                <button type="button" id="mark-all-read-btn" class="btn btn-secondary">Mark All as Read</button>
+            </div>
+            <div id="notification-list" class="notification-list"></div>
+        </section>
+
+        <section id="section-progress" class="dashboard-section" role="tabpanel" aria-labelledby="tab-progress">
+            <h2>Progress & Metrics</h2>
+            <div class="progress-box">
+                <p>Overall Completion Rate: <strong id="progress-percentage">0%</strong></p>
+                <div class="progress-bar-wrapper">
+                    <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <table id="summary-table">
+                    <thead>
+                        <tr>
+                            <th>Task Code</th>
+                            <th>Title</th>
+                            <th>Status</th>
+                            <th>Progress</th>
+                            <th>Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="summary-table-body"></tbody>
+                </table>
             </div>
         </section>
 
-        <section id="section-status" class="dashboard-section">
-            <h2>Application Status</h2>
-            <div id="status-details">
-                <p>Current Status: <strong id="application-state">Under Review</strong></p>
-                <p>Submitted On: <span id="application-date">2026-11-01</span></p>
+        <section id="section-diagnostics" class="dashboard-section" role="tabpanel" aria-labelledby="tab-diagnostics">
+            <h2>Browser Diagnostic Capabilities</h2>
+            <div class="card-grid">
+                <div class="info-card">
+                    <h3>Network & System</h3>
+                    <p>Online Status: <strong id="diag-online">Checking...</strong></p>
+                    <p>User Agent: <span id="diag-agent">Reading...</span></p>
+                </div>
+                <div class="info-card">
+                    <h3>Browser Features</h3>
+                    <p>Clipboard API: <strong id="diag-clipboard">Checking...</strong></p>
+                    <p>Storage Quota: <strong id="diag-storage">Checking...</strong></p>
+                </div>
             </div>
         </section>
     </main>
 
-    <div id="assignment-modal" class="modal-overlay hidden" aria-hidden="true">
-        <div class="modal-content">
-            <button type="button" id="modal-close-btn">&times;</button>
-            <h3 id="modal-title">Assignment Details</h3>
+    <div id="assignment-modal" class="modal-overlay hidden" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+        <div class="modal-content" tabindex="-1">
+            <button type="button" id="modal-close-btn" class="close-btn" aria-label="Close modal">&times;</button>
+            <h3 id="modal-title">Task Details</h3>
             <p id="modal-description"></p>
-            <p>Due Date: <span id="modal-due-date"></span></p>
-            <p>Status: <span id="modal-status"></span></p>
+            <p>Due Date: <strong id="modal-due-date"></strong></p>
+            <p>Status: <strong id="modal-status"></strong></p>
+            <p>Completion: <strong id="modal-progress"></strong></p>
+            <div class="modal-actions">
+                <button type="button" id="copy-modal-link-btn" class="btn btn-secondary">Copy Task Summary</button>
+            </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <footer id="page-footer">
+        <p>Touseef Ahmed | Rawalpindi, Pakistan | Bloomrix Internship Task 14</p>
+        <p><small>&copy; 2026 Touseef Ahmed. All rights reserved.</small></p>
+    </footer>
+
+    <!-- Modular Script Imports -->
+    <script src="js/dom-utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/debounce.js"></script>
+    <script src="js/url-state.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/data-utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/observers.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

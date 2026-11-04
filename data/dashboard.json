@@ -1,0 +1,66 @@
+[
+  {
+    "id": "task-1",
+    "title": "Task 1: HTML Basics & Personal Profile Form",
+    "status": "Completed",
+    "dueDate": "2026-10-15",
+    "progress": 100,
+    "description": "Constructed personal profile and contact form using semantically correct HTML elements and basic input structures."
+  },
+  {
+    "id": "task-2",
+    "title": "Task 2: Tables and Better Forms",
+    "status": "Completed",
+    "dueDate": "2026-10-22",
+    "progress": 100,
+    "description": "Implemented accessible form structures with input field validation, fieldsets, legends, and data tables."
+  },
+  {
+    "id": "task-3",
+    "title": "Task 3: Media and Page Sections",
+    "status": "Completed",
+    "dueDate": "2026-10-25",
+    "progress": 100,
+    "description": "Integrated responsive media elements, semantic sectioning elements, embedded resources, and structural hierarchy."
+  },
+  {
+    "id": "task-4",
+    "title": "Task 4: Advanced Form & Content Tags",
+    "status": "Completed",
+    "dueDate": "2026-10-28",
+    "progress": 100,
+    "description": "Engineered multi-fieldset intern application form featuring interactive options, selection controls, and input constraints."
+  },
+  {
+    "id": "task-5",
+    "title": "Task 5: Complete HTML Project",
+    "status": "Completed",
+    "dueDate": "2026-10-31",
+    "progress": 100,
+    "description": "Assembled mini internship portal combining semantic layouts, structured tables, complete forms, and media integration."
+  },
+  {
+    "id": "task-6",
+    "title": "Task 6: CSS Basics & Styling",
+    "status": "Completed",
+    "dueDate": "2026-11-01",
+    "progress": 100,
+    "description": "Styled profile page using fundamental CSS selectors, custom colors, typographic styling, and element alignment."
+  },
+  {
+    "id": "task-7",
+    "title": "Task 7: Box Model & Layout",
+    "status": "Completed",
+    "dueDate": "2026-11-03",
+    "progress": 100,
+    "description": "Built registration page layout using CSS box model, relative/absolute positioning, float layout, clearfixes, and sticky navigation."
+  },
+  {
+    "id": "task-14",
+    "title": "Task 14: Browser APIs & Vanilla JS",
+    "status": "In Progress",
+    "dueDate": "2026-11-10",
+    "progress": 75,
+    "description": "Developing interactive dashboard utilizing native browser APIs, web storage, File API, URLSearchParams, and Vanilla JS state handling."
+  }
+]
